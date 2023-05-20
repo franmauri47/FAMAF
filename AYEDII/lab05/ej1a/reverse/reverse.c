@@ -56,12 +56,14 @@ int main(int argc, char *argv[]) {
   array_dump(array, length);
 
   int *new_array=NULL;
-  /**
-  *
-  *  --- COMPLETAR ----
-  *
-  */
+  stack new = stack_empty();
+  for (unsigned int i = 0; i < length; i++){
+    new = stack_push(new,array[i]);
+  }
+  new_array = stack_to_array(new);
   printf("Reversed: ");
   array_dump(new_array, length);
+
+  free(new_array);
   return (EXIT_SUCCESS);
 }

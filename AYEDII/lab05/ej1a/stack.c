@@ -26,8 +26,7 @@ stack stack_push(stack s, stack_elem e){
 
 stack stack_pop(stack s){
     assert(invrep(s));
-    stack p = malloc(sizeof(struct _s_stack));
-    p = s;
+    stack p = s;
     s = s->next;
     free(p);
     if (s != NULL){
@@ -63,12 +62,12 @@ stack_elem *stack_to_array(stack s){
     stack_elem *array = calloc(size,sizeof(struct _s_stack));
     
     if (size != 0) {
-        stack aux = s;
-        for (int i = size-1; i >= 0; i--){
-            array[i] = s->elem;
-            aux = s->next;
+        int i = 0;
+        while (!stack_is_empty(s)){
+            array[i] = stack_top(s);
+            s = stack_pop(s);
+            i++;
         }
-        s = aux;
     }    
     else{
         array = NULL;
