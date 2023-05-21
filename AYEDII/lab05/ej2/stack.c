@@ -12,7 +12,7 @@ stack stack_empty(){
     stack new = malloc(sizeof(struct _s_stack));
     new->capacity = 0;
     new->size = 0;
-    new->elems = malloc(new->capacity * sizeof(int *));
+    new->elems = NULL;
     return new;
 }
 
