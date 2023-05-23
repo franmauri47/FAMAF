@@ -63,19 +63,18 @@ bool stack_is_empty(stack s){
 stack_elem *stack_to_array(stack s){
     assert(invrep(s));
     unsigned int size = stack_size(s);
-    stack_elem *array = calloc(size,sizeof(stack_elem));
+    stack_elem *array = NULL;
+    struct node *aux = s->first;
     
     if (size != 0) {
-        int i = 0;
-        while (!stack_is_empty(s)){
-            array[i] = stack_top(s);
-            s = stack_pop(s);
-            i++;
+        array = calloc(size,sizeof(stack_elem));
+        unsigned int i = size;
+        while (i > 0){
+            array[i-1] = aux->elem;
+            aux = aux->next;
+            i--;
         }
     }    
-    else{
-        array = NULL;
-    }
     assert(invrep(s));
     return array;    
 }
@@ -87,6 +86,5 @@ stack stack_destroy(stack s){
     free(s);
     return s;
 }
-
 
 
